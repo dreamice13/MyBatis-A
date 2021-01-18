@@ -1,5 +1,6 @@
 package tk.mybatis.simple.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,7 +12,6 @@ import tk.mybatis.simple.model.SysUser;
 
 public class UserMapperTest extends BaseMapperTest {
 	
-	@Test
 	public void testSelectById() {
 		// 获取sqlSession
 		SqlSession sqlSession = getSqlSession();
@@ -25,7 +25,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 
-	@Test
 	public void testSelectAll() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -38,7 +37,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testSelectRolesByUserId() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -47,6 +45,27 @@ public class UserMapperTest extends BaseMapperTest {
 			Assert.assertNotNull(roleList);
 			Assert.assertTrue(roleList.size() > 0 );
 		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testInsert() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			SysUser sysUser = new SysUser();
+			sysUser.setUserName("test1");
+			sysUser.setUserPassword("123456");
+			sysUser.setUserInfo("测试用户1");
+			sysUser.setUserEmail("test@mybatis");
+			sysUser.setHeadImg(new byte[] {1,2,3});
+			sysUser.setCreateTime(new Date());
+			int count = userMapper.insert(sysUser);
+			Assert.assertEquals(1, count);
+			Assert.assertNull(sysUser.getId());
+		}finally {
+			sqlSession.commit();
 			sqlSession.close();
 		}
 	}
