@@ -49,7 +49,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testInsert() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -64,6 +63,81 @@ public class UserMapperTest extends BaseMapperTest {
 			int count = userMapper.insert(sysUser);
 			Assert.assertEquals(1, count);
 			Assert.assertNull(sysUser.getId());
+		}finally {
+			sqlSession.commit();
+			sqlSession.close();
+		}
+	}
+	
+	public void testInsert2() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			SysUser sysUser = new SysUser();
+			sysUser.setUserName("test1");
+			sysUser.setUserPassword("123456");
+			sysUser.setUserInfo("测试用户2");
+			sysUser.setUserEmail("test@mybatis");
+			sysUser.setHeadImg(new byte[] {1,2,3});
+			sysUser.setCreateTime(new Date());
+			int count = userMapper.insert2(sysUser);
+			Assert.assertEquals(1, count);
+			Assert.assertNotNull(sysUser.getId());
+		}finally {
+			sqlSession.commit();
+			sqlSession.close();
+		}
+	}
+	
+	
+	public void testInsert3() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			SysUser sysUser = new SysUser();
+			sysUser.setUserName("test1");
+			sysUser.setUserPassword("123456");
+			sysUser.setUserInfo("测试用户3");
+			sysUser.setUserEmail("test@mybatis");
+			sysUser.setHeadImg(new byte[] {1,2,3});
+			sysUser.setCreateTime(new Date());
+			int count = userMapper.insert3(sysUser);
+			Assert.assertEquals(1, count);
+			Assert.assertNotNull(sysUser.getId());
+		}finally {
+			sqlSession.commit();
+			sqlSession.close();
+		}
+	}
+	
+	public void testUpdateById() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			SysUser sysUser = new SysUser();
+			sysUser.setId(1005L);
+			sysUser.setUserName("test1-update");
+			sysUser.setUserPassword("12345678");
+			sysUser.setUserInfo("测试用户1-update");
+			sysUser.setUserEmail("test-update@mybatis");
+			sysUser.setHeadImg(new byte[] {1,2,3});
+			sysUser.setCreateTime(new Date());
+			int count = userMapper.updateById(sysUser);
+			Assert.assertEquals(1, count);
+			Assert.assertEquals("test1-update", sysUser.getUserName());
+		}finally {
+			sqlSession.commit();
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testDeleteById() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			int count = userMapper.deleteById(1012L);
+			Assert.assertEquals(1, count);
 		}finally {
 			sqlSession.commit();
 			sqlSession.close();
