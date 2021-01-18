@@ -10,7 +10,7 @@ public class SysRole {
 	private Date createTime;
 	
 	// 扩展属性，用于多表查询
-	private SysUser user;
+//	private SysUser user;
 	
 	public Long getId() {
 		return id;

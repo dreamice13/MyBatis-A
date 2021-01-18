@@ -2,8 +2,6 @@ package tk.mybatis.simple.mapper;
 
 import java.util.List;
 
-import javax.management.relation.Role;
-
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
