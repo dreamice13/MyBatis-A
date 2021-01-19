@@ -1,6 +1,9 @@
 package tk.mybatis.simple.mapper;
 
+import java.util.HashMap;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import tk.mybatis.simple.model.SysRole;
 import tk.mybatis.simple.model.SysUser;
@@ -113,5 +116,19 @@ public interface UserMapper {
 	 * 修改时间: 2021年1月19日下午7:11:54
 	 * 修改备注: 
 	 */
-	List<SysRole> selectRolesByUserIdAndRoleEnabled(Long userId, Integer enabled);
+//	List<SysRole> selectRolesByUserIdAndRoleEnabled(Long userId, Integer enabled);
+	List<SysRole> selectRolesByUserIdAndRoleEnabled(@Param("userId") Long userId, @Param("enabled") Integer enabled);
+	
+	/**
+	 * 根据用户id和角色enabled获取角色--通过map传参	
+	 * @param map
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年1月19日下午7:30:35
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年1月19日下午7:30:35
+	 * 修改备注: 
+	 */
+	List<SysRole> selectRolesByUserIdAndRoleEnabled(HashMap map);
+	
 }

@@ -1,6 +1,7 @@
 package tk.mybatis.simple.mapper;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -131,7 +132,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testDeleteById() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -140,6 +140,26 @@ public class UserMapperTest extends BaseMapperTest {
 			Assert.assertEquals(1, count);
 		}finally {
 			sqlSession.commit();
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectRolesByUserIdAndRoleEnabled() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			// 两个参数报错
+			List<SysRole> roleList = userMapper.selectRolesByUserIdAndRoleEnabled((long) 1, 1);
+			// 使用map方式
+			HashMap<Object, Object> map = new HashMap<>();
+			map.put("userId", "1");
+			map.put("enabled", "1");
+//			List<SysRole> roleList = userMapper.selectRolesByUserIdAndRoleEnabled(map);
+			
+			Assert.assertNotNull(roleList);
+			Assert.assertTrue(roleList.size() > 0 );
+		}finally {
 			sqlSession.close();
 		}
 	}
