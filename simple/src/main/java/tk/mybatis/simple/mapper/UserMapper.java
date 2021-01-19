@@ -98,7 +98,20 @@ public interface UserMapper {
 	 * 创建时间: 2021年1月19日下午1:59:31
 	 * 修改人: Dreamice
 	 * 修改时间: 2021年1月19日下午1:59:31
-	 * 修改备注: 
+	 * 修改备注: 无
 	 */
 	int deleteById(Long id);
+	
+	/**
+	 * 根据用户id和角色enabled获取角色	
+	 * @param userId
+	 * @param enabled
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年1月19日下午7:11:54
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年1月19日下午7:11:54
+	 * 修改备注: 
+	 */
+	List<SysRole> selectRolesByUserIdAndRoleEnabled(Long userId, Integer enabled);
 }
