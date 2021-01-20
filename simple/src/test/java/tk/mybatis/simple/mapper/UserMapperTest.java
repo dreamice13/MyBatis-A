@@ -150,13 +150,19 @@ public class UserMapperTest extends BaseMapperTest {
 		try {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 			// 两个参数报错
-			List<SysRole> roleList = userMapper.selectRolesByUserIdAndRoleEnabled((long) 1, 1);
+//			List<SysRole> roleList = userMapper.selectRolesByUserIdAndRoleEnabled((long) 1, 1);
 			// 使用map方式
 			HashMap<Object, Object> map = new HashMap<>();
 			map.put("userId", "1");
 			map.put("enabled", "1");
 //			List<SysRole> roleList = userMapper.selectRolesByUserIdAndRoleEnabled(map);
 			
+			// 使用JavaBean方式
+			SysUser user = new SysUser();
+			user.setId(1L);
+			SysRole role = new SysRole();
+			role.setEnabled(1);
+			List<SysRole> roleList = userMapper.selectRolesByUserIdAndRoleEnabled(user, role);
 			Assert.assertNotNull(roleList);
 			Assert.assertTrue(roleList.size() > 0 );
 		}finally {

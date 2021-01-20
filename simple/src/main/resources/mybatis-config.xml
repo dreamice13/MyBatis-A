@@ -4,6 +4,7 @@
     <!-- logImpl属性配置指定使用LOG4J输出日志 -->
     <settings>
         <setting name="logImpl" value="LOG4J"/>
+         <!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
     </settings>
     <typeAliases>
         <package name="tk.mybatis.simple.model"/>

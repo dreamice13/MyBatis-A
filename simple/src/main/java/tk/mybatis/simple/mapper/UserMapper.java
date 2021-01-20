@@ -131,4 +131,16 @@ public interface UserMapper {
 	 */
 	List<SysRole> selectRolesByUserIdAndRoleEnabled(HashMap map);
 	
+	/**
+	 * 根据用户id和角色enabled获取角色--多个参数通过JavaBean的方式	
+	 * @param user
+	 * @param role
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年1月20日下午7:49:09
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年1月20日下午7:49:09
+	 * 修改备注: 
+	 */
+	List<SysRole> selectRolesByUserIdAndRoleEnabled(@Param("user") SysUser user, @Param("role") SysRole role);
 }
