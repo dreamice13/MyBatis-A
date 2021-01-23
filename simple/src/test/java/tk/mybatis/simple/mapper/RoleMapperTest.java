@@ -1,5 +1,6 @@
 package tk.mybatis.simple.mapper;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,7 +10,7 @@ import org.junit.Test;
 import tk.mybatis.simple.model.SysRole;
 
 public class RoleMapperTest extends BaseMapperTest{
-	@Test
+	
 	public void testSelectById() {
 		// 获取sqlSession
 		SqlSession sqlSession = getSqlSession();
@@ -27,5 +28,24 @@ public class RoleMapperTest extends BaseMapperTest{
 			sqlSession.close();
 		}
 	}
-
+	
+	@Test
+	public void testInsert() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
+			SysRole role =  new SysRole();
+			role.setId(3L);
+			role.setEnabled(1);
+			role.setRoleName("新增");
+			role.setCreateBy(1L);
+			role.setCreateTime(new Date());
+			int count = roleMapper.insert(role);
+			Assert.assertNotNull("count为null", count);
+			Assert.assertEquals(1, count);
+		} finally {
+			sqlSession.commit();
+			sqlSession.close();
+		}
+	}
 }
