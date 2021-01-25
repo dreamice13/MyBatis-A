@@ -29,7 +29,6 @@ public class RoleMapperTest extends BaseMapperTest{
 		}
 	}
 	
-	@Test
 	public void testInsert() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -43,6 +42,39 @@ public class RoleMapperTest extends BaseMapperTest{
 			Assert.assertNotNull("count为null", count);
 			Assert.assertNotNull(role.getId());
 			Assert.assertEquals(1, count);
+		} finally {
+			sqlSession.commit();
+			sqlSession.close();
+		}
+	}
+	
+	public void testUpdate() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
+			SysRole role =  new SysRole();
+			role.setId(6L);
+			role.setEnabled(1);
+			role.setRoleName("更新1");
+			role.setCreateBy(1L);
+			role.setCreateTime(new Date());
+			int count = roleMapper.update(role);
+			Assert.assertNotNull("count为null", count);
+			Assert.assertNotNull(role.getId());
+			Assert.assertEquals("更新1", role.getRoleName());
+		} finally {
+			sqlSession.commit();
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testDelete() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
+			int count = roleMapper.delete(8L);
+			Assert.assertNotNull("count为null", count);
 		} finally {
 			sqlSession.commit();
 			sqlSession.close();
