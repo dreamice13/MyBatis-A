@@ -3,9 +3,11 @@ package tk.mybatis.simple.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 
 import tk.mybatis.simple.model.SysRole;
 
@@ -53,4 +55,12 @@ public interface RoleMapper {
 	 */
 	@Insert({"insert into sys_role(id, role_name, enabled, create_by, create_time) values (#{id}, #{roleName}, #{enabled}, #{createBy}, #{createTime})"})
 	int insert(SysRole sysRole);
+	
+	@Insert({"insert into sys_role(role_name, enabled, create_by, create_time) values (#{roleName}, #{enabled}, #{createBy}, #{createTime})"})
+	@Options(useGeneratedKeys = true, keyProperty = "id")
+	int insert2(SysRole sysRole);
+	
+	@Insert({"insert into sys_role(role_name, enabled, create_by, create_time) values (#{roleName}, #{enabled}, #{createBy}, #{createTime})"})
+	@SelectKey(statement = "SELECT LAST_INSERT_ID()", before = false, keyProperty = "id", resultType = Long.class)
+	int insert3(SysRole sysRole);
 }

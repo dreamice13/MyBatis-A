@@ -35,13 +35,13 @@ public class RoleMapperTest extends BaseMapperTest{
 		try {
 			RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
 			SysRole role =  new SysRole();
-			role.setId(3L);
 			role.setEnabled(1);
-			role.setRoleName("新增");
+			role.setRoleName("新增3");
 			role.setCreateBy(1L);
 			role.setCreateTime(new Date());
-			int count = roleMapper.insert(role);
+			int count = roleMapper.insert3(role);
 			Assert.assertNotNull("count为null", count);
+			Assert.assertNotNull(role.getId());
 			Assert.assertEquals(1, count);
 		} finally {
 			sqlSession.commit();
