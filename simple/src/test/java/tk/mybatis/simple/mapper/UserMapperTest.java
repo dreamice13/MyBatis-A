@@ -144,7 +144,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testSelectRolesByUserIdAndRoleEnabled() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -165,6 +164,32 @@ public class UserMapperTest extends BaseMapperTest {
 			List<SysRole> roleList = userMapper.selectRolesByUserIdAndRoleEnabled(user, role);
 			Assert.assertNotNull(roleList);
 			Assert.assertTrue(roleList.size() > 0 );
+		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectByUser() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			// 只查询用户名
+			SysUser query = new SysUser();
+			query.setUserName("ad");
+			List<SysUser> userList = userMapper.selectByUser(query);
+			Assert.assertTrue(userList.size() > 0 );
+			// 只查询邮箱
+			query = new SysUser();
+			query.setUserEmail("test@mybatis");
+			userList = userMapper.selectByUser(query);
+			Assert.assertTrue(userList.size() > 0 );
+			// 用户名邮箱同时查询
+			query = new SysUser();
+			query.setUserName("ad");
+			query.setUserEmail("test@mybatis");
+			userList = userMapper.selectByUser(query);
+			Assert.assertTrue(userList.size() == 0 );
 		}finally {
 			sqlSession.close();
 		}

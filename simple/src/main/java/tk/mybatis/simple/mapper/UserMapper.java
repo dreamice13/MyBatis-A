@@ -143,4 +143,16 @@ public interface UserMapper {
 	 * 修改备注: 
 	 */
 	List<SysRole> selectRolesByUserIdAndRoleEnabled(@Param("user") SysUser user, @Param("role") SysRole role);
+	
+	/**
+	 * 根据动态条件查询用户信息	
+	 * @param sysUser
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年1月26日下午7:21:35
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年1月26日下午7:21:35
+	 * 修改备注: 
+	 */
+	List<SysUser> selectByUser(SysUser sysUser);
 }
