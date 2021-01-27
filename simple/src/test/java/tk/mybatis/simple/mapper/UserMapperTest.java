@@ -179,7 +179,7 @@ public class UserMapperTest extends BaseMapperTest {
 			query.setUserName("ad");
 			List<SysUser> userList = userMapper.selectByUser(query);
 			Assert.assertTrue(userList.size() > 0 );
-			// 只查询邮箱
+			// 只通过邮箱查询
 			query = new SysUser();
 			query.setUserEmail("test@mybatis");
 			userList = userMapper.selectByUser(query);
