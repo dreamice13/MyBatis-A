@@ -155,4 +155,16 @@ public interface UserMapper {
 	 * 修改备注: 
 	 */
 	List<SysUser> selectByUser(SysUser sysUser);
+	
+	/**
+	 * 选择性更新-使用if标签	
+	 * @param sysUser
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年1月30日下午9:04:35
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年1月30日下午9:04:35
+	 * 修改备注: 
+	 */
+	int updateByIdSelective(SysUser sysUser);
 }
