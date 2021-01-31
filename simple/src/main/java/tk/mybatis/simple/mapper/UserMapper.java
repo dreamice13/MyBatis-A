@@ -160,6 +160,7 @@ public interface UserMapper {
 	 * 选择性更新-使用if标签	
 	 * @param sysUser
 	 * @return
+	 * @return
 	 * 创建人: Dreamice
 	 * 创建时间: 2021年1月30日下午9:04:35
 	 * 修改人: Dreamice
@@ -167,4 +168,16 @@ public interface UserMapper {
 	 * 修改备注: 
 	 */
 	int updateByIdSelective(SysUser sysUser);
+	
+	/**
+	 * 查询-choose	
+	 * @param sysUser
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年1月31日上午11:21:45
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年1月31日上午11:21:45
+	 * 修改备注: 
+	 */
+	SysUser selectByIdOrUserName(SysUser sysUser);
 }

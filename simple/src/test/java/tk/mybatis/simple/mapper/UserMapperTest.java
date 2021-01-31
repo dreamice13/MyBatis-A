@@ -194,7 +194,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testUpdateByIdSelective() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -210,6 +209,27 @@ public class UserMapperTest extends BaseMapperTest {
 			Assert.assertEquals("test@mybatis.tk", user.getUserEmail());
 		}finally {
 			sqlSession.rollback();
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectByIdOrUserName() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			SysUser user = new SysUser();
+			user.setId(1L);
+			user.setUserName("admin");
+			SysUser queryUser = userMapper.selectByIdOrUserName(user);
+			Assert.assertNotNull(queryUser);
+			user.setId(null);
+			queryUser = userMapper.selectByIdOrUserName(user);
+			Assert.assertNotNull(queryUser);
+			user.setUserName(null);
+			queryUser = userMapper.selectByIdOrUserName(user);
+			Assert.assertNull(queryUser);
+		}finally {
 			sqlSession.close();
 		}
 	}
