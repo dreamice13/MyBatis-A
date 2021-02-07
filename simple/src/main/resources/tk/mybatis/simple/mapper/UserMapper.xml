@@ -158,4 +158,40 @@
             </otherwise>
         </choose>
     </select>
+    
+    <select id="selectByUserTrim" resultType="tk.mybatis.simple.model.SysUser">
+        select id, user_name userName, 
+            user_password userPassword, 
+            user_email userEmail, 
+            user_info userInfo,
+            head_img headImg,
+            create_time createTime
+        from sys_user
+        <trim prefix="where" prefixOverrides="and | or ">
+            <if test="userName != null and userName != ''">
+                and user_name like concat('%', #{userName}, '%')
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                and user_email = #{userEmail}
+            </if>
+        </trim>
+    </select>
+    
+    <select id="selectByUserWhere" resultType="tk.mybatis.simple.model.SysUser">
+        select id, user_name userName, 
+            user_password userPassword, 
+            user_email userEmail, 
+            user_info userInfo,
+            head_img headImg,
+            create_time createTime
+        from sys_user
+        <where>
+            <if test="userName != null and userName != ''">
+                and user_name like concat('%', #{userName}, '%')
+            </if>
+            <if test="userEmail != null and userEmail != ''">
+                and user_email = #{userEmail}
+            </if>
+        </where>
+    </select>
 </mapper>

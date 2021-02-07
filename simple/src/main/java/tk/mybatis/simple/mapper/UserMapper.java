@@ -180,4 +180,28 @@ public interface UserMapper {
 	 * 修改备注: 
 	 */
 	SysUser selectByIdOrUserName(SysUser sysUser);
+	
+	/**
+	 * 查询用户信息-trim标签的方式	
+	 * @param sysUser
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年2月7日下午5:56:02
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年2月7日下午5:56:02
+	 * 修改备注: 
+	 */
+	List<SysUser> selectByUserTrim(SysUser sysUser);
+	
+	/**
+	 * 查询用户信息-where标签的方式	
+	 * @param sysUser
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年2月7日下午6:16:21
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年2月7日下午6:16:21
+	 * 修改备注: 
+	 */
+	List<SysUser> selectByUserWhere(SysUser sysUser);
 }
