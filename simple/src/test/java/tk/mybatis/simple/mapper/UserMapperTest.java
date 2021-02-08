@@ -258,7 +258,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testSelectByUserWhere() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -280,6 +279,26 @@ public class UserMapperTest extends BaseMapperTest {
 			userList = userMapper.selectByUserWhere(query);
 			Assert.assertTrue(userList.size() == 0 );
 		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testUpdateByIdSelectiveSet() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			// 只查询用户名
+			SysUser user = new SysUser();
+			user.setId(1L);
+			user.setUserEmail("test@mybatis.tk");
+			int result = userMapper.updateByIdSelectiveSet(user);
+			Assert.assertEquals(1, result);
+			user = userMapper.selectById(1L);
+			Assert.assertEquals("admin", user.getUserName());
+			Assert.assertEquals("test@mybatis.tk", user.getUserEmail());
+		}finally {
+			sqlSession.rollback();
 			sqlSession.close();
 		}
 	}
