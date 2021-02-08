@@ -216,4 +216,16 @@ public interface UserMapper {
 	 * 修改备注: 
 	 */
 	int updateByIdSelectiveSet(SysUser sysUser);
+	
+	/**
+	 * 通过ID查询用户-使用foreach标签	
+	 * @param idList
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年2月8日下午4:45:44
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年2月8日下午4:45:44
+	 * 修改备注: 
+	 */
+	List<SysUser> selectByIdList(List<Long> idList);
 }

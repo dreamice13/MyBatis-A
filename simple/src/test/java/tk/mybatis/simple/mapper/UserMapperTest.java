@@ -1,5 +1,6 @@
 package tk.mybatis.simple.mapper;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -283,7 +284,7 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
+	
 	public void testUpdateByIdSelectiveSet() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -299,6 +300,23 @@ public class UserMapperTest extends BaseMapperTest {
 			Assert.assertEquals("test@mybatis.tk", user.getUserEmail());
 		}finally {
 			sqlSession.rollback();
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testselectByIdList() {
+		// 获取sqlSession
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			List<Long> idList = new ArrayList<>();
+			idList.add(1L);
+			idList.add(1001L);
+			List<SysUser> userList = userMapper.selectByIdList(idList);
+			Assert.assertNotNull(userList);
+			Assert.assertEquals(2, userList.size());
+		} finally {
 			sqlSession.close();
 		}
 	}

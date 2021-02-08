@@ -220,4 +220,12 @@
         </set>
         where id = #{id}
     </update>
+    
+    <select id="selectByIdList" resultMap="userMap">
+        select * from sys_user 
+        where id in 
+        <foreach collection="list" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>
