@@ -228,4 +228,5 @@ public interface UserMapper {
 	 * 修改备注: 
 	 */
 	List<SysUser> selectByIdList(List<Long> idList);
+	List<SysUser> selectByIdListArray(Long[] array);
 }

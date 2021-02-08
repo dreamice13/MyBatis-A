@@ -228,4 +228,12 @@
             #{id}
         </foreach>
     </select>
+    
+    <select id="selectByIdListArray" resultMap="userMap">
+        select * from sys_user 
+        where id in 
+        <foreach collection="array" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

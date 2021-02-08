@@ -1,6 +1,7 @@
 package tk.mybatis.simple.mapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -314,8 +315,11 @@ public class UserMapperTest extends BaseMapperTest {
 			idList.add(1L);
 			idList.add(1001L);
 			List<SysUser> userList = userMapper.selectByIdList(idList);
-			Assert.assertNotNull(userList);
 			Assert.assertEquals(2, userList.size());
+			
+			Long[] arr = {1L, 1001L};
+			List<SysUser> userList1 = userMapper.selectByIdListArray(arr);
+			Assert.assertEquals(2, userList1.size());
 		} finally {
 			sqlSession.close();
 		}
