@@ -305,7 +305,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testselectByIdList() {
 		// 获取sqlSession
 		SqlSession sqlSession = getSqlSession();
@@ -331,6 +330,20 @@ public class UserMapperTest extends BaseMapperTest {
 			Assert.assertEquals(2, userList3.size());
 			
 		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectUserByBind() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			SysUser sysUser = new SysUser();
+			sysUser.setUserName("tes");
+			List<SysUser> list = userMapper.selectUserByBind(sysUser);
+			Assert.assertTrue(list.size() > 0);
+		}finally {
 			sqlSession.close();
 		}
 	}

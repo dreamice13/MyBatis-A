@@ -231,4 +231,16 @@ public interface UserMapper {
 	List<SysUser> selectByIdListArray(Long[] array);
 	List<SysUser> selectByIdListMap(HashMap<String, Object> map);
 	List<SysUser> selectByIdListParam(@Param("idParam") List<Long> ids);
+	
+	/**
+	 * 通过名称模糊查询用户-bind	
+	 * @param uName
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年2月10日上午10:55:06
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年2月10日上午10:55:06
+	 * 修改备注: 
+	 */
+	List<SysUser> selectUserByBind(SysUser sysUser);
 }

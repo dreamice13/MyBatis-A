@@ -252,4 +252,13 @@
             #{id}
         </foreach>
     </select>
+    
+    <select id="selectUserByBind" resultMap="userMap">
+        select * from sys_user 
+        where 1=1
+        <if test="userName != null and userName != ''">
+            <bind name="uName" value="'%' + userName + '%'"/>
+            and user_name like #{uName}
+        </if>
+    </select>
 </mapper>
