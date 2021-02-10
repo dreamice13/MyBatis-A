@@ -243,4 +243,6 @@ public interface UserMapper {
 	 * 修改备注: 
 	 */
 	List<SysUser> selectUserByBind(SysUser sysUser);
+	
+	String SelectTime();
 }

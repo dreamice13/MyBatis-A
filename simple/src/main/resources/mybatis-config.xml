@@ -22,6 +22,10 @@
             </dataSource>
         </environment>
     </environments>
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="Oracle" value="oracle" />
+        <property name="MySQL" value="mysql" />
+    </databaseIdProvider>
     <mappers>
         <mapper resource="tk/mybatis/simple/mapper/CountryMapper.xml"/>
         <package name="tk.mybatis.simple.mapper"/>

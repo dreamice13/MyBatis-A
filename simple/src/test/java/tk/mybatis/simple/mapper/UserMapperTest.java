@@ -334,7 +334,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testSelectUserByBind() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -343,6 +342,19 @@ public class UserMapperTest extends BaseMapperTest {
 			sysUser.setUserName("tes");
 			List<SysUser> list = userMapper.selectUserByBind(sysUser);
 			Assert.assertTrue(list.size() > 0);
+		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectTime() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			String time = userMapper.SelectTime();
+			Assert.assertNotNull(time);
+			System.out.println(time);
 		}finally {
 			sqlSession.close();
 		}

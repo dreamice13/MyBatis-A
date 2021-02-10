@@ -261,4 +261,12 @@
             and user_name like #{uName}
         </if>
     </select>
+    
+    <select id="SelectTime"   resultType="String" databaseId="oracle">
+        SELECT  'oralce'||to_char(sysdate,'yyyy-mm-dd hh24:mi:ss')  FROM dual 
+    </select>
+    
+    <select id="SelectTime"   resultType="String" databaseId="mysql">
+        SELECT  NOW() FROM dual 
+    </select>
 </mapper>
