@@ -236,4 +236,20 @@
             #{id}
         </foreach>
     </select>
+    
+    <select id="selectByIdListMap" resultMap="userMap">
+        select * from sys_user 
+        where id in 
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+    
+    <select id="selectByIdListParam" resultMap="userMap">
+        select * from sys_user 
+        where id in 
+        <foreach collection="idParam" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

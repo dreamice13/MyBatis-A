@@ -311,15 +311,25 @@ public class UserMapperTest extends BaseMapperTest {
 		SqlSession sqlSession = getSqlSession();
 		try {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			// list
 			List<Long> idList = new ArrayList<>();
 			idList.add(1L);
 			idList.add(1001L);
 			List<SysUser> userList = userMapper.selectByIdList(idList);
 			Assert.assertEquals(2, userList.size());
-			
+			// array
 			Long[] arr = {1L, 1001L};
 			List<SysUser> userList1 = userMapper.selectByIdListArray(arr);
 			Assert.assertEquals(2, userList1.size());
+			// map、多参数
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("ids", arr);
+			List<SysUser> userList2 = userMapper.selectByIdListMap(map);
+			Assert.assertEquals(2, userList2.size());
+			
+			List<SysUser> userList3 = userMapper.selectByIdListParam(idList);
+			Assert.assertEquals(2, userList3.size());
+			
 		} finally {
 			sqlSession.close();
 		}

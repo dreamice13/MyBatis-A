@@ -229,4 +229,6 @@ public interface UserMapper {
 	 */
 	List<SysUser> selectByIdList(List<Long> idList);
 	List<SysUser> selectByIdListArray(Long[] array);
+	List<SysUser> selectByIdListMap(HashMap<String, Object> map);
+	List<SysUser> selectByIdListParam(@Param("idParam") List<Long> ids);
 }
