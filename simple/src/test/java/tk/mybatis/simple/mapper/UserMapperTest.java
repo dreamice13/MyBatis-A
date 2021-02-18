@@ -347,7 +347,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testSelectTime() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -355,6 +354,20 @@ public class UserMapperTest extends BaseMapperTest {
 			String time = userMapper.SelectTime();
 			Assert.assertNotNull(time);
 			System.out.println(time);
+		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectUserAndRolesById() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+//			SysUser user = userMapper.selectUserAndRolesById(1001L);
+			SysUser user = userMapper.selectUserAndRolesById2(1001L);
+			Assert.assertNotNull(user);
+			Assert.assertNotNull(user.getRole());
 		}finally {
 			sqlSession.close();
 		}

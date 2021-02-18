@@ -245,4 +245,17 @@ public interface UserMapper {
 	List<SysUser> selectUserByBind(SysUser sysUser);
 	
 	String SelectTime();
+	
+	/**
+	 * 根据用户id获取用户信息和角色信息	
+	 * @param id
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年2月18日下午3:52:18
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年2月18日下午3:52:18
+	 * 修改备注: 
+	 */
+	SysUser selectUserAndRolesById(Long id);
+	SysUser selectUserAndRolesById2(Long id);
 }
