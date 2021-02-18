@@ -10,12 +10,27 @@
         <result property="headImg" column="head_img" jdbcType="BLOB"/>
         <result property="createTime" column="create_time"  jdbcType="TIMESTAMP"/>
     </resultMap>
+    
     <resultMap type="tk.mybatis.simple.model.SysUser" extends="userMap" id="userRoleMap">
         <id property="role.id" column="role_id"/>
         <result property="role.roleName" column="role_name"/>
         <result property="role.enabled" column="enabled"/>
         <result property="role.createBy" column="create_by"/>
         <result property="role.createTime" column="role_create_time"  jdbcType="TIMESTAMP"/>
+    </resultMap>
+    
+    <resultMap type="tk.mybatis.simple.model.SysUser" extends="userMap" id="userRoleMap2">
+        <association property="role" columnPrefix="role_" javaType="tk.mybatis.simple.model.SysRole">
+            <id property="id" column="id"/>
+            <result property="roleName" column="role_name"/>
+            <result property="enabled" column="enabled"/>
+            <result property="createBy" column="create_by"/>
+            <result property="createTime" column="create_time"  jdbcType="TIMESTAMP"/>
+        </association>
+    </resultMap>
+    
+    <resultMap type="tk.mybatis.simple.model.SysUser" extends="userMap" id="userRoleMap3">
+        <association property="role" columnPrefix="role_" resultMap="tk.mybatis.simple.mapper.RoleMapper.roleMap"/>
     </resultMap>
     
     <select id="selectById" resultMap="userMap">
@@ -309,6 +324,26 @@
             r.role_name,
             r.enabled,
             r.create_by,
+            r.create_time role_create_time
+        from sys_user u
+        inner join sys_user_role ur on u.id = ur.user_id
+        inner join sys_role r on ur.role_id = r.id
+        where u.id = #{id}
+    </select>
+    <!-- <select id="selectUserAndRolesById3" resultMap="userRoleMap2"> -->
+    <select id="selectUserAndRolesById3" resultMap="userRoleMap3">
+        select 
+            u.id,
+            u.user_name userName,
+            u.user_password userPassword,
+            u.user_email userEmail,
+            u.user_info userInfo,
+            u.head_img headImg,
+            u.create_time createTime,
+            r.id role_id,
+            r.role_name role_role_name,
+            r.enabled role_enabled,
+            r.create_by role_create_by,
             r.create_time role_create_time
         from sys_user u
         inner join sys_user_role ur on u.id = ur.user_id

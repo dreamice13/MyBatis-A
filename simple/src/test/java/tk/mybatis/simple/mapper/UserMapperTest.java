@@ -365,7 +365,8 @@ public class UserMapperTest extends BaseMapperTest {
 		try {
 			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 //			SysUser user = userMapper.selectUserAndRolesById(1001L);
-			SysUser user = userMapper.selectUserAndRolesById2(1001L);
+//			SysUser user = userMapper.selectUserAndRolesById2(1001L);
+			SysUser user = userMapper.selectUserAndRolesById3(1001L);
 			Assert.assertNotNull(user);
 			Assert.assertNotNull(user.getRole());
 		}finally {

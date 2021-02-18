@@ -254,8 +254,12 @@ public interface UserMapper {
 	 * 创建时间: 2021年2月18日下午3:52:18
 	 * 修改人: Dreamice
 	 * 修改时间: 2021年2月18日下午3:52:18
-	 * 修改备注: 
+	 * 修改备注:
+	 *  selectUserAndRolesById：自动映射
+	 *  selectUserAndRolesById2：resultMap配置
+	 *  selectUserAndRolesById3：association方式
 	 */
 	SysUser selectUserAndRolesById(Long id);
 	SysUser selectUserAndRolesById2(Long id);
+	SysUser selectUserAndRolesById3(Long id);
 }
