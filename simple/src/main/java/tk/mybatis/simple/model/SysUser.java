@@ -1,6 +1,7 @@
 package tk.mybatis.simple.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysUser {
 	private Long id;
@@ -13,6 +14,8 @@ public class SysUser {
 	
 	// 使用自动映射处理一对一关系
 	private SysRole role;
+	// 处理一对多关系
+	private List<SysRole> roleList;
 	
 	public Long getId() {
 		return id;
@@ -61,5 +64,11 @@ public class SysUser {
 	}
 	public void setRole(SysRole role) {
 		this.role = role;
+	}
+	public List<SysRole> getRoleList() {
+		return roleList;
+	}
+	public void setRoleList(List<SysRole> roleList) {
+		this.roleList = roleList;
 	}
 }
