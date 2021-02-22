@@ -263,4 +263,15 @@ public interface UserMapper {
 	SysUser selectUserAndRolesById2(Long id);
 	SysUser selectUserAndRolesById3(Long id);
 	SysUser selectUserAndRolesByIdSelect(Long id);
+	
+	/**
+	 * 获取所有用户以及对应的角色	
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年2月22日上午11:32:41
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年2月22日上午11:32:41
+	 * 修改备注: 
+	 */
+	List<SysUser> selectAllUserAndRoles();
 }

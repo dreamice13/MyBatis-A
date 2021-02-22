@@ -359,7 +359,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testSelectUserAndRolesById() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -371,6 +370,24 @@ public class UserMapperTest extends BaseMapperTest {
 			Assert.assertNotNull(user);
 			System.out.println("调用user.getRole()");
 			Assert.assertNotNull(user.getRole());
+		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectAllUserAndRoles() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			List<SysUser> userList = userMapper.selectAllUserAndRoles();
+			System.out.println("用户数" + userList.size());
+			for(SysUser user : userList) {
+				System.out.println("用户名" + user.getUserName());
+				for(SysRole role : user.getRoleList()) {
+					System.out.println("角色名" + role.getRoleName());
+				}
+			}
 		}finally {
 			sqlSession.close();
 		}
