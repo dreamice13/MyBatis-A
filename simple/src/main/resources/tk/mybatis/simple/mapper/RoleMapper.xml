@@ -9,6 +9,10 @@
         <result property="createTime" column="create_time"  jdbcType="TIMESTAMP"/>
     </resultMap>
     
+    <resultMap type="tk.mybatis.simple.model.SysRole" id="rolePrivilegeListMap" extends="roleMap">
+        <collection property="privilegeList" columnPrefix="privilege_" resultMap="tk.mybatis.simple.mapper.PrivilegeMapper.privilegeMap"/>
+    </resultMap>
+    
     <select id="selectRoleById" resultMap="roleMap">
         select * from sys_role where id = #{id}
     </select>

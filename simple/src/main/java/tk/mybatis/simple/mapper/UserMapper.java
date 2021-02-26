@@ -274,4 +274,15 @@ public interface UserMapper {
 	 * 修改备注: 
 	 */
 	List<SysUser> selectAllUserAndRoles();
+	
+	/**
+	 * 获取所有用户以及对应的角色、权限	
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年2月25日下午7:09:01
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年2月25日下午7:09:01
+	 * 修改备注: 
+	 */
+	List<SysUser> selectAllUserAndRolesAndPrivilege();
 }
