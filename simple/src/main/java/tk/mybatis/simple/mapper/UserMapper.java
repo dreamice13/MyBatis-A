@@ -285,4 +285,16 @@ public interface UserMapper {
 	 * 修改备注: 
 	 */
 	List<SysUser> selectAllUserAndRolesAndPrivilege();
+	
+	/**
+	 * 用户查询-collection嵌套查询	
+	 * @param id
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年2月27日上午11:04:46
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年2月27日上午11:04:46
+	 * 修改备注: 
+	 */
+	SysUser selectAllUserAndRolesSelect(Long id);
 }

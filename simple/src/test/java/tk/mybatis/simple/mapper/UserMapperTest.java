@@ -393,7 +393,6 @@ public class UserMapperTest extends BaseMapperTest {
 		}
 	}
 	
-	@Test
 	public void testSelectAllUserAndRolesAndPrivilege() {
 		SqlSession sqlSession = getSqlSession();
 		try {
@@ -407,6 +406,25 @@ public class UserMapperTest extends BaseMapperTest {
 					for(SysPrivilege pri : role.getPrivilegeList()) {
 						System.out.println("权限名" + pri.getPrivilegeName());
 					}
+				}
+			}
+		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectAllUserAndRolesSelect() {
+		SqlSession sqlSession = getSqlSession();
+		try {
+			UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+			SysUser user = userMapper.selectAllUserAndRolesSelect(1L);
+			System.out.println("用户名：" + user.getUserName());
+			for(SysRole role : user.getRoleList()) {
+				System.out.println("------------------------------");
+				System.out.println("角色名:" + role.getRoleName());
+				for(SysPrivilege pri : role.getPrivilegeList()) {
+					System.out.println("权限名:" + pri.getPrivilegeName());
 				}
 			}
 		}finally {

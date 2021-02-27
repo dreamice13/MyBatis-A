@@ -13,7 +13,18 @@
         <collection property="privilegeList" columnPrefix="privilege_" resultMap="tk.mybatis.simple.mapper.PrivilegeMapper.privilegeMap"/>
     </resultMap>
     
+    <resultMap type="tk.mybatis.simple.model.SysRole" id="rolePrivilegeListMapSelect"  extends="roleMap">
+        <collection property="privilegeList" fetchType="lazy" column="{role_id=id}" select="tk.mybatis.simple.mapper.PrivilegeMapper.selectPrivilegeByRoleId"/>
+    </resultMap>
+    
     <select id="selectRoleById" resultMap="roleMap">
         select * from sys_role where id = #{id}
+    </select>
+    
+    <select id="selectRoleByUserId" resultMap="rolePrivilegeListMapSelect">
+        select r.*
+        from sys_role r
+        inner join sys_user_role ur on r.id = ur.role_id
+        where ur.user_id = #{user_id}
     </select>
 </mapper>

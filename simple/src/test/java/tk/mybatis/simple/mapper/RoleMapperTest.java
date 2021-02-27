@@ -7,11 +7,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
 import org.junit.Test;
 
+import tk.mybatis.simple.model.SysPrivilege;
 import tk.mybatis.simple.model.SysRole;
 
 public class RoleMapperTest extends BaseMapperTest{
 	
-	@Test
 	public void testSelectById() {
 		// 获取sqlSession
 		SqlSession sqlSession = getSqlSession();
@@ -77,6 +77,25 @@ public class RoleMapperTest extends BaseMapperTest{
 			Assert.assertNotNull("count为null", count);
 		} finally {
 			sqlSession.commit();
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectRoleByUserId() {
+		// 获取sqlSession
+		SqlSession sqlSession = getSqlSession();
+		try {
+			RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
+			List<SysRole> roleList = roleMapper.selectRoleByUserId((long) 1);
+			Assert.assertTrue(roleList.size() > 0);
+			for(SysRole role : roleList) {
+				System.out.println(role.getRoleName());
+				for(SysPrivilege pri : role.getPrivilegeList()) {
+					System.out.println("权限名:" + pri.getPrivilegeName());
+				}
+			}
+		} finally {
 			sqlSession.close();
 		}
 	}
