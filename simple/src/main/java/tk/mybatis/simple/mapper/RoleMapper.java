@@ -83,4 +83,16 @@ public interface RoleMapper {
 	 * 修改备注: 
 	 */
 	List<SysRole> selectRoleByUserId(Long user_id);
+	
+	/**
+	 * 根据用户ID查询用户角色和权限-鉴别器映射
+	 * @param user_id
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年2月27日上午11:43:58
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年2月27日上午11:43:58
+	 * 修改备注: 
+	 */
+	List<SysRole> selectRoleByUserIdChoose(Long user_id);
 }

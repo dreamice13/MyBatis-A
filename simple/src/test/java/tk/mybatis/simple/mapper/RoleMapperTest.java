@@ -81,7 +81,6 @@ public class RoleMapperTest extends BaseMapperTest{
 		}
 	}
 	
-	@Test
 	public void testSelectRoleByUserId() {
 		// 获取sqlSession
 		SqlSession sqlSession = getSqlSession();
@@ -91,6 +90,35 @@ public class RoleMapperTest extends BaseMapperTest{
 			Assert.assertTrue(roleList.size() > 0);
 			for(SysRole role : roleList) {
 				System.out.println(role.getRoleName());
+				for(SysPrivilege pri : role.getPrivilegeList()) {
+					System.out.println("权限名:" + pri.getPrivilegeName());
+				}
+			}
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectRoleByUserIdChoose() {
+		// 获取sqlSession
+		SqlSession sqlSession = getSqlSession();
+		try {
+			RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
+			SysRole role2 = roleMapper.selectById(2L);
+			role2.setEnabled(0);
+			roleMapper.update(role2);
+			List<SysRole> roleList = roleMapper.selectRoleByUserIdChoose((long) 1);
+			Assert.assertTrue(roleList.size() > 0);
+			for(SysRole role : roleList) {
+				System.out.println("------------------------");
+				System.out.println("角色名：" + role.getRoleName());
+				if(role.getId().equals(1L)) {
+					Assert.assertNotNull(role.getPrivilegeList());
+				} else if(role.getId().equals(2L)) {
+					Assert.assertNull(role.getPrivilegeList());
+					continue;
+				}
 				for(SysPrivilege pri : role.getPrivilegeList()) {
 					System.out.println("权限名:" + pri.getPrivilegeName());
 				}
