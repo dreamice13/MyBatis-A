@@ -99,7 +99,6 @@ public class RoleMapperTest extends BaseMapperTest{
 		}
 	}
 	
-	@Test
 	public void testSelectRoleByUserIdChoose() {
 		// 获取sqlSession
 		SqlSession sqlSession = getSqlSession();
@@ -123,6 +122,21 @@ public class RoleMapperTest extends BaseMapperTest{
 					System.out.println("权限名:" + pri.getPrivilegeName());
 				}
 			}
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	@Test
+	public void testSelectRoleByIdSql() {
+		// 获取sqlSession
+		SqlSession sqlSession = getSqlSession();
+		try {
+			RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
+//			SysRole role2 = roleMapper.selectRoleByIdSql(2L);
+//			Assert.assertEquals("普通用户", role2.getRoleName());
+			SysRole role2 = roleMapper.selectRoleByIdSql2(1001L, 1);
+			Assert.assertEquals("普通用户", role2.getRoleName());
 		} finally {
 			sqlSession.close();
 		}

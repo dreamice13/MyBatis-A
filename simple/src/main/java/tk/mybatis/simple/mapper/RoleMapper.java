@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -95,4 +96,17 @@ public interface RoleMapper {
 	 * 修改备注: 
 	 */
 	List<SysRole> selectRoleByUserIdChoose(Long user_id);
+	
+	/**
+	 * 查询角色-sql	
+	 * @param id
+	 * @return
+	 * 创建人: Dreamice
+	 * 创建时间: 2021年3月5日上午11:21:03
+	 * 修改人: Dreamice
+	 * 修改时间: 2021年3月5日上午11:21:03
+	 * 修改备注: 
+	 */
+	SysRole selectRoleByIdSql(Long id);
+	SysRole selectRoleByIdSql2(@Param("uid") Long uid, @Param("enabled") int enabled);
 }

@@ -41,4 +41,19 @@
         inner join sys_user_role ur on r.id = ur.role_id
         where ur.user_id = #{user_id}
     </select>
+    
+    <sql id="field">
+        role_name, enabled
+    </sql>
+    <sql id="selectSql">
+        select ur.role_id from sys_user_role ur where ur.user_id = #{uid}
+    </sql>
+    <select id="selectRoleByIdSql" resultMap="roleMap">
+        select <include refid="field"/> from sys_role where id = #{id}
+    </select>
+    <select id="selectRoleByIdSql2" resultMap="roleMap">
+        select <include refid="field"/> from sys_role 
+        where id in (<include refid="selectSql"/>)
+        and enabled = #{enabled}
+    </select>
 </mapper>
